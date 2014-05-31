@@ -1,0 +1,36 @@
+﻿.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.imgColumn {
+    width: 40px;
+}
+
+.rigthColumn{
+    
+}
+
+.leftColumn{
+
+}
+
+.result{
+    width: 30px;
+    text-align: center;
+}
+
+.valid{
+    border-color: #00C710;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 199, 16, 0.6);
+}
+
+.invalid{
+    border-color: #rgba(226, 49, 49, 1);
+    box-shadow: 0 1px 1px rgba(226, 49, 49, 0.075) inset, 0 0 8px rgba(226, 49, 49, 0.6);
+}
+
+.clickable{
+    cursor: pointer; 
+    cursor: hand;
+}

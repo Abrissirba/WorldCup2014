@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TipsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CountryID" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Country" Relationship="Self.fk_City_CountryID_Country_ID" FromRole="City" ToRole="Country" />
+    <NavigationProperty Name="Team" Relationship="Self.fk_Team_CityID_City_ID" FromRole="City" ToRole="Team" />
+  </EntityType>
+  <EntityType Name="Competition">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="CountryID" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Country" Relationship="Self.fk_Competition_CountryID_Country_ID" FromRole="Competition" ToRole="Country" />
+    <NavigationProperty Name="Group" Relationship="TipsModel.fk_Group_CompetitionID_Competition_ID" FromRole="Competition" ToRole="Group" />
+    <NavigationProperty Name="UserCompetition" Relationship="TipsModel.fk_UserCompetition_CompetitionID_Competition_ID" FromRole="Competition" ToRole="UserCompetition" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CountryCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="City" Relationship="Self.fk_City_CountryID_Country_ID" FromRole="Country" ToRole="City" />
+    <NavigationProperty Name="Competition" Relationship="Self.fk_Competition_CountryID_Country_ID" FromRole="Country" ToRole="Competition" />
+    <Property Name="FlagImg" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Logo" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CityID" Type="Int32" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="City" Relationship="Self.fk_Team_CityID_City_ID" FromRole="Team" ToRole="City" />
+    <NavigationProperty Name="Game" Relationship="TipsModel.fk_Game_AwayTeamID_Team_ID" FromRole="Team" ToRole="Game" />
+    <NavigationProperty Name="Game1" Relationship="TipsModel.fk_Game_HomeTeamID_Team_ID" FromRole="Team" ToRole="Game" />
+  </EntityType>
+  <Association Name="fk_City_CountryID_Country_ID">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Team_CityID_City_ID">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Team" Type="Self.Team" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Team">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Competition_CountryID_Country_ID">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Competition" Type="Self.Competition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Competition">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TipsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="City" EntityType="Self.City" />
+    <EntitySet Name="Competition" EntityType="Self.Competition" />
+    <EntitySet Name="Country" EntityType="Self.Country" />
+    <EntitySet Name="Team" EntityType="Self.Team" />
+    <AssociationSet Name="fk_City_CountryID_Country_ID" Association="Self.fk_City_CountryID_Country_ID">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="City" EntitySet="City" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Team_CityID_City_ID" Association="Self.fk_Team_CityID_City_ID">
+      <End Role="City" EntitySet="City" />
+      <End Role="Team" EntitySet="Team" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Competition_CountryID_Country_ID" Association="Self.fk_Competition_CountryID_Country_ID">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Competition" EntitySet="Competition" />
+    </AssociationSet>
+    <EntitySet Name="Game" EntityType="TipsModel.Game" />
+    <EntitySet Name="Group" EntityType="TipsModel.Group" />
+    <EntitySet Name="User" EntityType="TipsModel.User" />
+    <EntitySet Name="UserGameExpectedResult" EntityType="TipsModel.UserGameExpectedResult" />
+    <AssociationSet Name="fk_Group_CompetitionID_Competition_ID" Association="TipsModel.fk_Group_CompetitionID_Competition_ID">
+      <End Role="Competition" EntitySet="Competition" />
+      <End Role="Group" EntitySet="Group" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Game_AwayTeamID_Team_ID" Association="TipsModel.fk_Game_AwayTeamID_Team_ID">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="Game" EntitySet="Game" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Game_GroupID_Team_ID" Association="TipsModel.fk_Game_GroupID_Team_ID">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="Game" EntitySet="Game" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Game_HomeTeamID_Team_ID" Association="TipsModel.fk_Game_HomeTeamID_Team_ID">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="Game" EntitySet="Game" />
+    </AssociationSet>
+    <AssociationSet Name="fk_UserGameExpectedResult_GameID_Game_ID" Association="TipsModel.fk_UserGameExpectedResult_GameID_Game_ID">
+      <End Role="Game" EntitySet="Game" />
+      <End Role="UserGameExpectedResult" EntitySet="UserGameExpectedResult" />
+    </AssociationSet>
+    <AssociationSet Name="fk_UserGameExpectedResult_UserID_User_ID" Association="TipsModel.fk_UserGameExpectedResult_UserID_User_ID">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserGameExpectedResult" EntitySet="UserGameExpectedResult" />
+    </AssociationSet>
+    <EntitySet Name="webpages_Membership" EntityType="TipsModel.webpages_Membership" />
+    <EntitySet Name="webpages_OAuthMembership" EntityType="TipsModel.webpages_OAuthMembership" />
+    <EntitySet Name="UserCompetition" EntityType="TipsModel.UserCompetition" />
+    <AssociationSet Name="fk_UserCompetition_CompetitionID_Competition_ID" Association="TipsModel.fk_UserCompetition_CompetitionID_Competition_ID">
+      <End Role="Competition" EntitySet="Competition" />
+      <End Role="UserCompetition" EntitySet="UserCompetition" />
+    </AssociationSet>
+    <AssociationSet Name="fk_UserCompetition_UserID_User_ID" Association="TipsModel.fk_UserCompetition_UserID_User_ID">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserCompetition" EntitySet="UserCompetition" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Game">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HomeTeamID" Type="Int32" Nullable="false" />
+    <Property Name="AwayTeamID" Type="Int32" Nullable="false" />
+    <Property Name="HomeTeamResult" Type="Int32" />
+    <Property Name="AwayTeamResult" Type="Int32" />
+    <Property Name="GroupID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Team" Relationship="TipsModel.fk_Game_AwayTeamID_Team_ID" FromRole="Game" ToRole="Team" />
+    <NavigationProperty Name="Group" Relationship="TipsModel.fk_Game_GroupID_Team_ID" FromRole="Game" ToRole="Group" />
+    <NavigationProperty Name="Team1" Relationship="TipsModel.fk_Game_HomeTeamID_Team_ID" FromRole="Game" ToRole="Team" />
+    <NavigationProperty Name="UserGameExpectedResult" Relationship="TipsModel.fk_UserGameExpectedResult_GameID_Game_ID" FromRole="Game" ToRole="UserGameExpectedResult" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CompetitionID" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Competition" Relationship="TipsModel.fk_Group_CompetitionID_Competition_ID" FromRole="Group" ToRole="Competition" />
+    <NavigationProperty Name="Game" Relationship="TipsModel.fk_Game_GroupID_Team_ID" FromRole="Group" ToRole="Game" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="UserGameExpectedResult" Relationship="TipsModel.fk_UserGameExpectedResult_UserID_User_ID" FromRole="User" ToRole="UserGameExpectedResult" />
+    <NavigationProperty Name="UserCompetition" Relationship="TipsModel.fk_UserCompetition_UserID_User_ID" FromRole="User" ToRole="UserCompetition" />
+  </EntityType>
+  <EntityType Name="UserGameExpectedResult">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="GameID" Type="Int32" Nullable="false" />
+    <Property Name="HomeResult" Type="Int32" Nullable="false" />
+    <Property Name="AwayResult" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Game" Relationship="TipsModel.fk_UserGameExpectedResult_GameID_Game_ID" FromRole="UserGameExpectedResult" ToRole="Game" />
+    <NavigationProperty Name="User" Relationship="TipsModel.fk_UserGameExpectedResult_UserID_User_ID" FromRole="UserGameExpectedResult" ToRole="User" />
+  </EntityType>
+  <Association Name="fk_Group_CompetitionID_Competition_ID">
+    <End Type="TipsModel.Competition" Role="Competition" Multiplicity="1" />
+    <End Type="TipsModel.Group" Role="Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Competition">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="CompetitionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Game_AwayTeamID_Team_ID">
+    <End Type="TipsModel.Team" Role="Team" Multiplicity="1" />
+    <End Type="TipsModel.Game" Role="Game" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Game">
+        <PropertyRef Name="AwayTeamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Game_GroupID_Team_ID">
+    <End Type="TipsModel.Group" Role="Group" Multiplicity="1" />
+    <End Type="TipsModel.Game" Role="Game" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Game">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Game_HomeTeamID_Team_ID">
+    <End Type="TipsModel.Team" Role="Team" Multiplicity="1" />
+    <End Type="TipsModel.Game" Role="Game" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Game">
+        <PropertyRef Name="HomeTeamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_UserGameExpectedResult_GameID_Game_ID">
+    <End Type="TipsModel.Game" Role="Game" Multiplicity="1" />
+    <End Type="TipsModel.UserGameExpectedResult" Role="UserGameExpectedResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Game">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserGameExpectedResult">
+        <PropertyRef Name="GameID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_UserGameExpectedResult_UserID_User_ID">
+    <End Type="TipsModel.User" Role="User" Multiplicity="1" />
+    <End Type="TipsModel.UserGameExpectedResult" Role="UserGameExpectedResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserGameExpectedResult">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="webpages_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsConfirmed" Type="Boolean" />
+    <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="webpages_OAuthMembership">
+    <Key>
+      <PropertyRef Name="Provider" />
+      <PropertyRef Name="ProviderUserId" />
+    </Key>
+    <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserCompetition">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="CompetitionID" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Competition" Relationship="TipsModel.fk_UserCompetition_CompetitionID_Competition_ID" FromRole="UserCompetition" ToRole="Competition" />
+    <NavigationProperty Name="User" Relationship="TipsModel.fk_UserCompetition_UserID_User_ID" FromRole="UserCompetition" ToRole="User" />
+  </EntityType>
+  <Association Name="fk_UserCompetition_CompetitionID_Competition_ID">
+    <End Type="TipsModel.Competition" Role="Competition" Multiplicity="1" />
+    <End Type="TipsModel.UserCompetition" Role="UserCompetition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Competition">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserCompetition">
+        <PropertyRef Name="CompetitionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_UserCompetition_UserID_User_ID">
+    <End Type="TipsModel.User" Role="User" Multiplicity="1" />
+    <End Type="TipsModel.UserCompetition" Role="UserCompetition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserCompetition">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

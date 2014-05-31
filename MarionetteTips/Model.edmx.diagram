@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b1651563a9b047cf9b3b4b079ebec1e0" Name="Diagram1">
+        <EntityTypeShape EntityType="TipsModel.City" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TipsModel.Competition" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TipsModel.Country" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="TipsModel.Team" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="TipsModel.fk_City_CountryID_Country_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="TipsModel.fk_Team_CityID_City_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="TipsModel.fk_Competition_CountryID_Country_ID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TipsModel.Game" Width="1.5" PointX="7.5" PointY="2.875" />
+        <EntityTypeShape EntityType="TipsModel.Group" Width="1.5" PointX="5.25" PointY="5.875" />
+        <EntityTypeShape EntityType="TipsModel.User" Width="1.5" PointX="7.5" PointY="9.375" />
+        <EntityTypeShape EntityType="TipsModel.UserGameExpectedResult" Width="1.5" PointX="9.75" PointY="3.25" />
+        <AssociationConnector Association="TipsModel.fk_Group_CompetitionID_Competition_ID" />
+        <AssociationConnector Association="TipsModel.fk_Game_AwayTeamID_Team_ID" />
+        <AssociationConnector Association="TipsModel.fk_Game_GroupID_Team_ID" />
+        <AssociationConnector Association="TipsModel.fk_Game_HomeTeamID_Team_ID" />
+        <AssociationConnector Association="TipsModel.fk_UserGameExpectedResult_GameID_Game_ID" />
+        <AssociationConnector Association="TipsModel.fk_UserGameExpectedResult_UserID_User_ID" />
+        <EntityTypeShape EntityType="TipsModel.webpages_Membership" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="TipsModel.webpages_OAuthMembership" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="TipsModel.UserCompetition" Width="1.5" PointX="9.75" PointY="7.25" />
+        <AssociationConnector Association="TipsModel.fk_UserCompetition_CompetitionID_Competition_ID" />
+        <AssociationConnector Association="TipsModel.fk_UserCompetition_UserID_User_ID" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
