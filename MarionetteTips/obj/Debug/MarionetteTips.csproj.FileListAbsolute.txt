@@ -37,3 +37,44 @@ C:\Users\Mackan\documents\visual studio 2013\Projects\MarionetteTips\MarionetteT
 C:\Users\Mackan\documents\visual studio 2013\Projects\MarionetteTips\MarionetteTips\bin\WebMatrix.WebData.dll
 C:\Users\Mackan\documents\visual studio 2013\Projects\MarionetteTips\MarionetteTips\bin\WebMatrix.Data.xml
 C:\Users\Mackan\documents\visual studio 2013\Projects\MarionetteTips\MarionetteTips\bin\WebMatrix.WebData.xml
+C:\Projects\WorldCup2014\MarionetteTips\bin\MarionetteTips.dll.config
+C:\Projects\WorldCup2014\MarionetteTips\bin\MarionetteTips.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\MarionetteTips.pdb
+C:\Projects\WorldCup2014\MarionetteTips\bin\Antlr3.Runtime.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\EntityFramework.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\EntityFramework.SqlServer.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\Microsoft.Web.Infrastructure.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\Newtonsoft.Json.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Net.Http.Formatting.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.Http.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.Http.WebHost.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.Mvc.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.Optimization.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.Providers.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.Razor.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.WebPages.Deployment.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.WebPages.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.WebPages.Razor.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\WebGrease.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\WebMatrix.Data.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\WebMatrix.WebData.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\EntityFramework.xml
+C:\Projects\WorldCup2014\MarionetteTips\bin\EntityFramework.SqlServer.xml
+C:\Projects\WorldCup2014\MarionetteTips\bin\Newtonsoft.Json.xml
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Net.Http.Formatting.xml
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.Http.xml
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.Http.WebHost.xml
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.Providers.xml
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.Mvc.xml
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.Razor.xml
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.WebPages.xml
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.WebPages.Deployment.xml
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.WebPages.Razor.xml
+C:\Projects\WorldCup2014\MarionetteTips\bin\WebMatrix.Data.xml
+C:\Projects\WorldCup2014\MarionetteTips\bin\WebMatrix.WebData.xml
+C:\Projects\WorldCup2014\MarionetteTips\obj\Debug\MarionetteTips.csprojResolveAssemblyReference.cache
+C:\Projects\WorldCup2014\MarionetteTips\obj\Debug\MarionetteTips.dll
+C:\Projects\WorldCup2014\MarionetteTips\obj\Debug\MarionetteTips.pdb
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.Helpers.dll
+C:\Projects\WorldCup2014\MarionetteTips\bin\System.Web.Helpers.xml

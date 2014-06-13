@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Mackan\documents\visual studio 2013\Projects\MarionetteTips\MarionetteTips\Model.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Projects\WorldCup2014\MarionetteTips\Model.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

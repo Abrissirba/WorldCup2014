@@ -36,5 +36,6 @@ namespace MarionetteTips
         public virtual DbSet<webpages_Membership> webpages_Membership { get; set; }
         public virtual DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
         public virtual DbSet<UserCompetition> UserCompetition { get; set; }
+        public virtual DbSet<UserLogins> UserLogins { get; set; }
     }
 }

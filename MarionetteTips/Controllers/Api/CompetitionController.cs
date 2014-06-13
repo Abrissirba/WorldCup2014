@@ -31,10 +31,17 @@ namespace MarionetteTips.Controllers.Api
             using (var db = new TipsEntities())
             {
                 Competition competition = db.Competition.Where(c => c.ID == id).FirstOrDefault();
-                List<UserCompetitionDTO> userCompetitionDTO = db.UserCompetition
-                                                                .Where(uc => uc.CompetitionID == id)
-                                                                .Select(uc => new UserCompetitionDTO() { ID = uc.ID, CompetitionID = uc.Competition.ID, User = uc.User })
-                                                                .ToList();
+                PointsDAL pointsDAL = new PointsDAL();
+
+                var userCompetitionList = (from uc in db.UserCompetition
+                                           where uc.CompetitionID == id
+                                           select uc).ToList();
+
+                List<UserCompetitionDTO> userCompetitionDTO = (from uc in userCompetitionList
+                                                                join p in pointsDAL.getPointsPerUserForCompetition(id) on uc.UserID equals p.UserID
+                                                                where uc.CompetitionID == id 
+                                                                select new UserCompetitionDTO { ID = uc.ID, CompetitionID = uc.Competition.ID, User = uc.User, Points = p.Points }
+                                                                ).ToList();
                 var currentUser = UserDAL.getUser(User.Identity.Name);
                 bool userParticipateInCompetition = false;
                 if (currentUser != null)

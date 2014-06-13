@@ -15,5 +15,7 @@ namespace MarionetteTips.Models
         public User User { get; set; }
         [DataMember]
         public int CompetitionID { get; set; }
+        [DataMember]
+        public int Points { get; set; }
     }
 }

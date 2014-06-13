@@ -150,6 +150,16 @@
           <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserLogins">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="TimeForLogin" Type="datetime" Nullable="false" />
+          <Property Name="Browser" Type="nvarchar" MaxLength="100" />
+          <Property Name="BrowserVersion" Type="nvarchar" MaxLength="10" />
+        </EntityType>
         <Association Name="fk_City_CountryID_Country_ID">
           <End Role="Country" Type="Self.Country" Multiplicity="1" />
           <End Role="City" Type="Self.City" Multiplicity="*" />
@@ -294,6 +304,7 @@
           <EntitySet Name="UserGameExpectedResult" EntityType="Self.UserGameExpectedResult" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLogins" EntityType="Self.UserLogins" Schema="LOG" store:Type="Tables" />
           <AssociationSet Name="fk_City_CountryID_Country_ID" Association="Self.fk_City_CountryID_Country_ID">
             <End Role="Country" EntitySet="Country" />
             <End Role="City" EntitySet="City" />
@@ -497,6 +508,7 @@
             <End Role="User" EntitySet="User" />
             <End Role="UserCompetition" EntitySet="UserCompetition" />
           </AssociationSet>
+          <EntitySet Name="UserLogins" EntityType="TipsModel.UserLogins" />
         </EntityContainer>
         <EntityType Name="Game">
           <Key>
@@ -699,6 +711,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserLogins">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="TimeForLogin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Browser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BrowserVersion" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -855,6 +877,17 @@
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="CompetitionID" ColumnName="CompetitionID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLogins">
+            <EntityTypeMapping TypeName="TipsModel.UserLogins">
+              <MappingFragment StoreEntitySet="UserLogins">
+                <ScalarProperty Name="BrowserVersion" ColumnName="BrowserVersion" />
+                <ScalarProperty Name="Browser" ColumnName="Browser" />
+                <ScalarProperty Name="TimeForLogin" ColumnName="TimeForLogin" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

@@ -33,19 +33,24 @@ namespace MarionetteTips.Controllers.Api
 
                     List<GroupDTO> groupDTO = new List<GroupDTO>();
 
+                    PointsDAL pointsDAL = new PointsDAL();
                     foreach (Group grup in groups)
                     {
-                        List<GameDTO> games = (from g in grup.Game
-                                               select new GameDTO()
-                                               {
-                                                   HomeTeam = g.Team,
-                                                   AwayTeam = g.Team1,
-                                                   HomeResult = g.HomeTeamResult,
-                                                   AwayResult = g.AwayTeamResult,
-                                                   date = g.Date,
-                                                   userExcpectedHomeResult = g.UserGameExpectedResult.Where(t => t.UserID == userCompetition.UserID).Select(t => t.HomeResult).FirstOrNull(),
-                                                   userExcpectedAwayResult = g.UserGameExpectedResult.Where(t => t.UserID == userCompetition.UserID).Select(t => t.AwayResult).FirstOrNull()
-                                               }).ToList();
+                        List<UserGameDTO> games = (from g in grup.Game
+                                                    select new UserGameDTO()
+                                                   {
+                                                       ID = g.UserGameExpectedResult.Where(t => t.UserID == userCompetition.UserID).Select(t => t.ID).FirstOrDefault(),
+                                                       UserID = g.UserGameExpectedResult.Where(t => t.UserID == userCompetition.UserID).Select(t => t.UserID).FirstOrDefault(),
+                                                       GameID = g.ID,
+                                                       HomeTeam = g.Team1,
+                                                       AwayTeam = g.Team,
+                                                       HomeResult = g.HomeTeamResult,
+                                                       AwayResult = g.AwayTeamResult,
+                                                       date = g.Date,
+                                                       userExcpectedHomeResult = g.UserGameExpectedResult.Where(t => t.UserID == userCompetition.UserID).Select(t => t.HomeResult).FirstOrNull(),
+                                                       userExcpectedAwayResult = g.UserGameExpectedResult.Where(t => t.UserID == userCompetition.UserID).Select(t => t.AwayResult).FirstOrNull(),
+                                                       Score = pointsDAL.getGameScore(g.HomeTeamResult, g.AwayTeamResult, g.UserGameExpectedResult.Where(t => t.UserID == userCompetition.UserID).Select(t => t.HomeResult).FirstOrNull(), g.UserGameExpectedResult.Where(t => t.UserID == userCompetition.UserID).Select(t => t.AwayResult).FirstOrNull())
+                                                   }).ToList();
                         groupDTO.Add(new GroupDTO() { ID = grup.ID, Title = grup.Title, CompetitionID = grup.CompetitionID, Games = games });
                     }
                     CompetitionDTO competitionDTO = new CompetitionDTO() { Competition = competition, Groups = groupDTO };
@@ -76,6 +81,27 @@ namespace MarionetteTips.Controllers.Api
                         CreatedDate = DateTime.UtcNow
                     };
                     db.UserCompetition.Add(userCompetition);
+
+                    var games = (from g in db.Game
+                                join gr in db.Group on g.GroupID equals gr.ID
+                                join c in db.Competition on gr.CompetitionID equals c.ID
+                                where c.ID == userCompetitionDTO.CompetitionID
+                                select g).ToList();
+
+                    foreach(Game g in games)
+                    {
+                        UserGameExpectedResult userGame = new UserGameExpectedResult()
+                        {
+                            GameID = g.ID,
+                            UserID = currentUser.ID,
+                            ModifiedBy = currentUser.Email,
+                            CreatedBy = currentUser.Email,
+                            ModifiedDate = DateTime.UtcNow,
+                            CreatedDate = DateTime.UtcNow,
+                        };
+                        db.UserGameExpectedResult.Add(userGame);
+                    }
+
                     db.SaveChanges();
                     userCompetitionDTO.ID = userCompetition.ID;
                     return Ok(userCompetitionDTO);

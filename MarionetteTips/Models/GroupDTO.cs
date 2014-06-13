@@ -19,6 +19,6 @@ namespace MarionetteTips.Models
         public int CompetitionID { get; set; }
 
         [DataMember]
-        public List<GameDTO> Games { get; set; }
+        public List<UserGameDTO> Games { get; set; }
     }
 }

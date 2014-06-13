@@ -1,9 +1,13 @@
 ﻿using MarionetteTips.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
+using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Security;
 using WebMatrix.WebData;
@@ -35,14 +39,27 @@ namespace MarionetteTips.Controllers.Api
         // POST api/login
         public IHttpActionResult Post([FromBody]ClientUserDTO clientUserDTO)
         {
+
+
+
             if (ModelState.IsValid)
             {
                 if (WebSecurity.Login(clientUserDTO.Email, clientUserDTO.Password, persistCookie: false))
                 {
                     FormsAuthentication.SetAuthCookie(clientUserDTO.Email, false);
+                    var userAgent = HttpContext.Current.Request.UserAgent;
+                    var userBrowser = new HttpBrowserCapabilities { Capabilities = new Hashtable { { string.Empty, userAgent } } };
+                    var factory = new BrowserCapabilitiesFactory();
+                    factory.ConfigureBrowserCapabilities(new NameValueCollection(), userBrowser);
+
+                    var BrowserBrand = userBrowser.Browser;
+                    var BrowserVersion = userBrowser.Version;
+
                     using (var db = new TipsEntities())
                     {
                         var user = db.User.Where(u => u.Email == clientUserDTO.Email).FirstOrDefault();
+                        db.UserLogins.Add(new UserLogins() { UserID = user.ID, TimeForLogin = DateTime.UtcNow, Browser = BrowserBrand, BrowserVersion = BrowserVersion });
+                        db.SaveChanges();
                         return Ok(user);
                     }
                 }
