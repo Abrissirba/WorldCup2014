@@ -24,8 +24,8 @@
                 var correctSign = "Correct Sign: 10p <br/>";
                 var incorrectSign = "Incorrect Sign: 0p <br/>";
                 var incorrectResult = "Incorrect result: -3p <br/>";
-                var homeResult = "Incorrect home result: -";
-                var awayResult = "Incorrect away result: -";
+                var homeResult = "Incorrect home result: ";
+                var awayResult = "Incorrect away result: ";
                 var totalScore = "Total score: " + this.Score + "p";
                 var text = "";
                 if (!isEmpty(this.HomeResult) && !isEmpty(this.AwayResult)) {
@@ -34,18 +34,18 @@
                         text += correctSign;
                     else if (this.HomeResult > this.AwayResult && this.userExcpectedHomeResult > this.userExcpectedAwayResult) {
                         text += incorrectResult;
-                        text += (this.HomeResult - this.userExcpectedHomeResult !== 0) ? homeResult + (this.HomeResult - this.userExcpectedHomeResult) + "p<br/>" : "";
-                        text += (this.AwayResult - this.userExcpectedAwayResult !== 0) ? awayResult + (this.AwayResult - this.userExcpectedAwayResult) + "p<br/>" : "";
+                        text += (this.HomeResult - this.userExcpectedHomeResult !== 0) ? homeResult + (Math.min(this.HomeResult, this.userExcpectedHomeResult) - Math.max(this.HomeResult, this.userExcpectedHomeResult)) + "p<br/>" : "";
+                        text += (this.AwayResult - this.userExcpectedAwayResult !== 0) ? awayResult + (Math.min(this.AwayResult, this.userExcpectedAwayResult) - Math.max(this.AwayResult, this.userExcpectedAwayResult)) + "p<br/>" : "";
                     }
                     else if (this.HomeResult == this.AwayResult && this.userExcpectedHomeResult == this.userExcpectedAwayResult) {
                         text += incorrectResult;
-                        text += (this.HomeResult - this.userExcpectedHomeResult !== 0) ? homeResult + (this.HomeResult - this.userExcpectedHomeResult) + "p<br/>" : "";
-                        text += (this.AwayResult - this.userExcpectedAwayResult !== 0) ? awayResult + (this.AwayResult - this.userExcpectedAwayResult) + "p<br/>" : "";
+                        text += (this.HomeResult - this.userExcpectedHomeResult !== 0) ? homeResult + (Math.min(this.HomeResult, this.userExcpectedHomeResult) - Math.max(this.HomeResult, this.userExcpectedHomeResult)) + "p<br/>" : "";
+                        text += (this.AwayResult - this.userExcpectedAwayResult !== 0) ? awayResult + (Math.min(this.AwayResult, this.userExcpectedAwayResult) - Math.max(this.AwayResult, this.userExcpectedAwayResult)) + "p<br/>" : "";
                     }
                     else if (this.HomeResult < this.AwayResult && this.userExcpectedHomeResult < this.userExcpectedAwayResult) {
                         text += incorrectResult;
-                        text += (this.HomeResult - this.userExcpectedHomeResult !== 0) ? homeResult + (this.HomeResult - this.userExcpectedHomeResult) + "p<br/>" : "";
-                        text += (this.AwayResult - this.userExcpectedAwayResult !== 0) ? awayResult + (this.AwayResult - this.userExcpectedAwayResult) + "p<br/>" : "";
+                        text += (this.HomeResult - this.userExcpectedHomeResult !== 0) ? homeResult + (Math.min(this.HomeResult, this.userExcpectedHomeResult) - Math.max(this.HomeResult, this.userExcpectedHomeResult)) + "p<br/>" : "";
+                        text += (this.AwayResult - this.userExcpectedAwayResult !== 0) ? awayResult + (Math.min(this.AwayResult, this.userExcpectedAwayResult) - Math.max(this.AwayResult, this.userExcpectedAwayResult)) + "p<br/>" : "";
                     }
                     else {
                         text = incorrectSign;

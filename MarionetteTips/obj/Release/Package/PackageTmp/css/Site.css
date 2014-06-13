@@ -1,4 +1,8 @@
-﻿.col-centered{
+﻿body{
+    background: #EEEEEB;
+}
+
+.col-centered{
     float: none;
     margin: 0 auto;
 }
@@ -77,26 +81,57 @@
     padding-top: 8px;
 }
 .group-table-region{
+    overflow: hidden;
+    -webkit-transition: max-height 0.8s;
+    -moz-transition: max-height 0.8s;
+    transition: max-height 0.8s;
+    max-height: 310px;
+}
 
+.hide-region{
+    //height: 0px !important; 
+    max-height: 0px !important; 
+    overflow: hidden !important;
 }
 
 .group-game-region{
+    overflow-y: auto;
+    overflow-x: hidden;
     background: #FFFCEC;
+    -webkit-transition: max-height 0.8s;
+    -moz-transition: max-height 0.8s;
+    transition: max-height 0.8s;
+    max-height: 600px;
 }
 
 .group-header{
+    font-size: 30px;
     padding-left: 5px;
-padding-top: 6px;
-margin-top: 0px;
-background: #F3F3F3;
-border-bottom: 1px solid #CCCCCC;
-box-shadow: 0px 0px 1px 1px rgba(197, 197, 197, 0.1);
-color: #757575;
+    padding-top: 6px;
+    margin-top: 0px;
+    background: #035000;
+    border-bottom: 1px solid #CCCCCC;
+    border-radius: 10px 10px 0px 0px;
+    box-shadow: 0px 0px 5px 2px rgba(197, 197, 197, 0.7);
+    color: #F8FF4A;
+}
+
+.group-header-collapse-icon{
+    float: right;
+    margin-right: 6px;
+    margin-top: 8px;
+    color: #FFFB9E;
+    font-size: 22px;
+}
+
+.group-table{
+    margin-bottom: 0px;
 }
 
 .group-table > tbody > tr > td{
     vertical-align: middle;
 }
+
 .result{
     width: 30px;
     text-align: center;
@@ -175,4 +210,15 @@ body{
 
 .score-text{
     padding-right: 36px;
+}
+
+.navigation{
+    background-color: #000841;
+}
+.navigation-title{
+    color: #FFF85C  !important;
+}
+
+.navigation-link{
+    color: #FFF85C  !important;
 }
